@@ -1,0 +1,41 @@
+{% extends 'store/main.html' %} {% load static %}
+
+{% block content %}
+
+    {% if searched %}
+        <h2 style="text-align: center">Here are results for {{searched}} </h2>
+&nbsp
+        <div class="row">
+        {% for product in product %}
+
+            <div class="col-lg-4">
+            <img class="thumbnail" src="{{product.imageURL}}" />
+            <div class="box-element product">
+                <h6><strong>{{product.name}}</strong></h6>
+                <hr />
+
+                <button
+                    data-product="{{product.id}}"
+                    data-action="add"
+                    class="btn btn-outline-secondary add-btn update-cart"
+                >
+                    Add to Cart
+                </button>
+
+                <a class="btn btn-outline-success" href="#">View</a>
+                <h4 style="display: inline-block; float: right">
+                    <strong>${{product.price}}</strong>
+                </h4>
+            </div>
+        </div>
+
+        {% endfor %}
+        </div>
+
+    {% else %}
+
+        <h3 style="text-align: center">Hey!! You forgot to search for an item!</h3>
+
+    {% endif %}
+
+{% endblock content %}

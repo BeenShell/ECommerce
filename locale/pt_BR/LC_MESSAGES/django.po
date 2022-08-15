@@ -1,0 +1,204 @@
+p# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-28 23:58-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: store/templates/store/main.html:82
+msgid "Beauty Shop"
+msgstr "Salão de Beleza"
+
+#. Translators: Home page, not an actual residence
+#: store/templates/store/main.html:169
+msgid "Home"
+msgstr "Início"
+
+#: store/templates/store/main.html:173
+msgid "Make Up"
+msgstr "Maquiagem"
+
+#: store/templates/store/main.html:178
+msgid "Lips"
+msgstr "Lábios"
+
+#: store/templates/store/main.html:180
+msgid "Lipstick"
+msgstr "Batom"
+
+#: store/templates/store/main.html:181
+msgid "Lip Gloss"
+msgstr "Gloss"
+
+#: store/templates/store/main.html:182
+msgid "Lip liner"
+msgstr "Delineador Labial"
+
+#: store/templates/store/main.html:185
+msgid "Eyes"
+msgstr "Olhos"
+
+#: store/templates/store/main.html:187
+msgid "Mascara"
+msgstr "Máscara"
+
+#: store/templates/store/main.html:188
+msgid "Eyeliner"
+msgstr "Delineador"
+
+#: store/templates/store/main.html:189
+msgid "Eyebrow"
+msgstr "Sobrancelhas"
+
+#: store/templates/store/main.html:190
+msgid "Eyeshadow"
+msgstr "Sombra"
+
+#: store/templates/store/main.html:191
+msgid "Eye palettes"
+msgstr "Paletas"
+
+#: store/templates/store/main.html:195
+msgid "Face"
+msgstr "Rosto"
+
+#: store/templates/store/main.html:197
+msgid "Foundation"
+msgstr "Fundação"
+
+#: store/templates/store/main.html:198
+msgid "Powder"
+msgstr "Pó"
+
+#: store/templates/store/main.html:199
+msgid "Concealer"
+msgstr "Corretivo"
+
+#: store/templates/store/main.html:200
+msgid "Highlighter"
+msgstr "Iluminação"
+
+#: store/templates/store/main.html:201
+msgid "Setting Spray"
+msgstr "Spray de Base"
+
+#: store/templates/store/main.html:202
+msgid "Primer"
+msgstr "Primer"
+
+#: store/templates/store/main.html:203
+msgid "Contour"
+msgstr "Contour"
+
+#: store/templates/store/main.html:210
+msgid "Skincare"
+msgstr "Tratamento de pele"
+
+#: store/templates/store/main.html:215
+msgid "Cleanser"
+msgstr "Limpador"
+
+#: store/templates/store/main.html:216
+msgid "Lotion"
+msgstr "Loção"
+
+#: store/templates/store/main.html:217 store/templates/store/main.html:233
+msgid "Moisturizer"
+msgstr "Hidratante"
+
+#: store/templates/store/main.html:218
+msgid "Treatments"
+msgstr "Tratamentos"
+
+#: store/templates/store/main.html:219
+msgid "Gift Sets"
+msgstr "Presentes"
+
+#: store/templates/store/main.html:225
+msgid "Bath & Body"
+msgstr "Banhagem"
+
+#: store/templates/store/main.html:231
+msgid "Body Lotion"
+msgstr "Loção Corporal"
+
+#: store/templates/store/main.html:232
+msgid "Body Mist"
+msgstr "Névoa de banho"
+
+#: store/templates/store/main.html:234
+msgid "Candles"
+msgstr "Velas"
+
+#: store/templates/store/main.html:235
+msgid "Beauty Supplies & Gift Sets"
+msgstr "Conjuntos de presentes"
+
+#: store/templates/store/main.html:241
+msgid "Fragrance"
+msgstr "Fragâncias"
+
+#: store/templates/store/main.html:246
+msgid "Women"
+msgstr "Femininos"
+
+#: store/templates/store/main.html:247
+msgid "Men"
+msgstr "Masculinos"
+
+#: store/templates/store/main.html:248
+msgid "Kids"
+msgstr "Infantil"
+
+#: store/templates/store/main.html:254
+msgid "Other"
+msgstr "Outros"
+
+#: store/templates/store/main.html:260
+msgid "Hair"
+msgstr "Cabelo"
+
+#: store/templates/store/main.html:261
+msgid "Tools and Brushes"
+msgstr "Untensílios e Escovas"
+
+#: store/templates/store/main.html:262
+msgid "Sales and Clearance"
+msgstr "Vendas e limpeza"
+
+#: store/templates/store/main.html:297
+msgid "Search"
+msgstr "Buscar"
+
+#: store/templates/store/main.html:336
+msgid "Services"
+msgstr "Serviços"
+
+#: store/templates/store/main.html:369
+msgid "We Have Everything That You Are Looking For!"
+msgstr "Nós temos tudo que procura!"
+
+#: store/templates/store/main.html:371
+msgid "Contact us!"
+msgstr "Nos contate!"
+
+#: store/templates/store/main.html:372
+msgid "Email:"
+msgstr "Email:"
+
+#: store/templates/store/main.html:373
+msgid "Phone Number:"
+msgstr "Número de telefone"

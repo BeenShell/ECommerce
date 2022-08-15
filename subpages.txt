@@ -1,0 +1,13 @@
+
+
+fragrance
+	- women
+	- men
+	- kids
+---------------------------------------
+skincare
+	- cleanser
+	- lotion
+	- moisturizer
+	- reatments
+	- gift sets

@@ -1,0 +1,28 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<h3 style="text-align: center">Kids Fragrance</h3>
+<div class="row">
+    {% for fragrance_kids in fragrance_kids %}
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{fragrance_kids.imageURL}}" />
+        <div class="box-element product">
+            <h6><strong>{{fragrance_kids.name}}</strong></h6>
+            <hr />
+
+            <button
+                data-product="{{fragrance_kids.id}}"
+                data-action="add"
+                class="btn btn-outline-secondary add-btn update-cart"
+            >
+                Add to Cart
+            </button>
+
+            <a class="btn btn-outline-success" href="#">View</a>
+            <h4 style="display: inline-block; float: right">
+                <strong>${{fragrance_kids.price}}</strong>
+            </h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

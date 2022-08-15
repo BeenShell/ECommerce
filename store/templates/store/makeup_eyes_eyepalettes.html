@@ -1,0 +1,28 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<h3 style="text-align: center">Eye Palettes</h3>
+<div class="row">
+    {% for makeup_eyes_eyepalettes in makeup_eyes_eyepalettes %}
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{makeup_eyes_eyepalettes.imageURL}}" />
+        <div class="box-element product">
+            <h6><strong>{{makeup_eyes_eyepalettes.name}}</strong></h6>
+            <hr />
+
+            <button
+                data-product="{{makeup_eyes_eyepalettes.id}}"
+                data-action="add"
+                class="btn btn-outline-secondary add-btn update-cart"
+            >
+                Add to Cart
+            </button>
+
+            <a class="btn btn-outline-success" href="#">View</a>
+            <h4 style="display: inline-block; float: right">
+                <strong>${{makeup_eyes_eyepalettes.price}}</strong>
+            </h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+TO-DO List:
+
+Remove once finished and runs without errors.
+
+====================================================================
+
+- Remodel the Home-page and the layout of the site, link: https://wireframe.cc/uEVtLg
+- Add the sub-pages into the categories, found at subpages.txt.
+- Create a login/logout, and a register page.
+- Add functionality to the View button
+- Add a Pay-Pal, and Pay On Site buttons at check out.
+- Add a stock field when adding a new product, make sure the have it show if the item is in stock or not
+    and have it remove once the item has been ordered.
+- Remodel the admin page
+- Store User's orders in a cleaner and more organized way
+- Add functionality to the search bar
+- Fix Any Bugs
+- Remove the digital or not digital from the options when adding a new item
+- Add a description field about the products
+- Other...

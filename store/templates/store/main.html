@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html>
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'css/main.css' %}"
+        />
+
+        <script type="text/javascript">
+            var user = "{{request.user}}";
+
+            function getToken(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== "") {
+                    var cookies = document.cookie.split(";");
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (
+                            cookie.substring(0, name.length + 1) ===
+                            name + "="
+                        ) {
+                            cookieValue = decodeURIComponent(
+                                cookie.substring(name.length + 1)
+                            );
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getToken("csrftoken");
+
+            function getCookie(name) {
+                // Split cookie string and get all individual name=value pairs in an array
+                var cookieArr = document.cookie.split(";");
+
+                // Loop through the array elements
+                for (var i = 0; i < cookieArr.length; i++) {
+                    var cookiePair = cookieArr[i].split("=");
+
+                    /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+                    if (name == cookiePair[0].trim()) {
+                        // Decode the cookie value and return
+                        return decodeURIComponent(cookiePair[1]);
+                    }
+                }
+
+                // Return null if not found
+                return null;
+            }
+            var cart = JSON.parse(getCookie("cart"));
+
+            if (cart == undefined) {
+                cart = {};
+                console.log("Cart Created!", cart);
+                document.cookie =
+                    "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+            }
+            console.log("Cart:", cart);
+        </script>
+    </head>
+
+    <body>
+
+        {% translate "Beauty Shop" as shop_title_text %}
+
+        <title> {{ shop_title_text }} </title>
+
+        <script type="text/javascript">
+            const menu = document.querySelector('.menu');
+            const menuSection = menu.querySelector('.menu-section');
+            const menuArrow = menu.querySelector('.menu-mobile-arrow');
+            const menuClosed = menu.querySelector('.menu-mobile-close');
+            const menuTrigger = document.querySelector('.menu-mobile-trigger');
+            const menuOverlay = document.querySelector('.overlay');
+            let subMenu;
+            menuSection.addEventListener('click', (e) => {
+               if (!menu.classList.contains('active')) {
+                  return;
+               }
+               if (e.target.closest('.menu-item-has-children')) {
+                  const hasChildren = e.target.closest('.menu-item-has-children');
+                  showSubMenu(hasChildren);
+               }
+            });
+            menuArrow.addEventListener('click', () => {
+               hideSubMenu();
+            });
+            menuTrigger.addEventListener('click', () => {
+               toggleMenu();
+            });
+            menuClosed.addEventListener('click', () => {
+               toggleMenu();
+            });
+            menuOverlay.addEventListener('click', () => {
+               toggleMenu();
+            });
+            function toggleMenu() {
+               menu.classList.toggle('active');
+               menuOverlay.classList.toggle('active');
+            }
+            function showSubMenu(hasChildren) {
+               subMenu = hasChildren.querySelector('.menu-subs');
+               subMenu.classList.add('active');
+               subMenu.style.animation = 'slideLeft 0.5s ease forwards';
+               const menuTitle = hasChildren.querySelector('i').parentNode.childNodes[0].textContent;
+               menu.querySelector('.menu-mobile-title').innerHTML = menuTitle;
+               menu.querySelector('.menu-mobile-header').classList.add('active');
+            }
+            function hideSubMenu() {
+               subMenu.style.animation = 'slideRight 0.5s ease forwards';
+               setTimeout(() => {
+                  subMenu.classList.remove('active');
+               }, 300);
+               menu.querySelector('.menu-mobile-title').innerHTML = '';
+               menu.querySelector('.menu-mobile-header').classList.remove('active');
+            }
+            window.onresize = function () {
+               if (this.innerWidth > 991) {
+                  if (menu.classList.contains('active')) {
+                     toggleMenu();
+                  }
+               }
+            };
+
+        </script>
+    </body>
+    <header class="header">
+
+
+      <!-- 
+      {% get_current_language as LANGUAGE_CODE %}
+        Current Lang: {{ LANGUAGE_CODE }}-.  
+      -->
+
+      <div class="container">
+        <div class="wrapper">
+          <div class="header-item-left">
+            <h1><a href="{% url 'store' %}" class="brand"> {{ shop_title_text }} </a></h1>
+          </div>
+          <div class="header-item-center">
+            <div class="overlay"></div>
+            <nav class="menu">
+              <div class="menu-mobile-header">
+                <button type="button" class="menu-mobile-arrow"><i class="ion ion-ios-arrow-back"></i></button>
+                <div class="menu-mobile-title"></div>
+                <button type="button" class="menu-mobile-close"><i class="ion ion-ios-close"></i></button>
+              </div>
+              <ul class="menu-section">
+
+                {# Translators: Home page, not an actual residence #}
+                <li><a href="{% url 'store' %}">{% translate "Home" %}</a></li>
+
+                <li class="menu-item-has-children">
+
+                  {% translate "Make Up" as make_up_text %}
+
+                  <a href="{% url 'store' %}"> {{ make_up_text }}<i class="ion ion-ios-arrow-down"></i></a>
+                  <div class="menu-subs menu-mega menu-column-4">
+                    <div class="list-item">
+                      <h4 class="title"> {% translate "Lips" %} </h4>
+                      <ul>
+                        <li><a href="{% url 'makeup_lip_stick' %}">{% translate "Lipstick" %}</a></li>
+                        <li><a href="{% url 'makeup_lip_lipgloss' %}">{% translate "Lip Gloss" %}</a></li>
+                        <li><a href="{% url 'makeup_lip_lipliner' %}">{% translate "Lip liner" %}</a></li>
+
+                      </ul>
+                      <h4 class="title">{% translate "Eyes" %} </h4>
+                      <ul>
+                        <li><a href="{% url 'makeup_eyes_mascara' %}">{% translate "Mascara" %}</a></li>
+                        <li><a href="{% url 'makeup_eyes_eyeliner' %}">{% translate "Eyeliner" %}</a></li>
+                        <li><a href="{% url 'makeup_eyes_eyebrow' %}">{% translate "Eyebrow" %}</a></li>
+                        <li><a href="{% url 'makeup_eyes_eyeshadow' %}">{% translate "Eyeshadow" %}</a></li>
+                        <li><a href="{% url 'makeup_eyes_eyepalettes' %}">{% translate "Eye palettes" %}</a></li>
+                      </ul>
+                    </div>
+                    <div class="list-item">
+                      <h4 class="title">{% translate "Face" %}</h4>
+                      <ul>
+                        <li><a href="{% url 'makeup_face_foundation' %}">{% translate "Foundation" %}</a></li>
+                        <li><a href="{% url 'makeup_face_powder' %}">{% translate "Powder" %}</a></li>
+                        <li><a href="{% url 'makeup_face_concealer' %}">{% translate "Concealer" %}</a></li>
+                        <li><a href="{% url 'makeup_face_highlighter' %}">{% translate "Highlighter" %}</a></li>
+                        <li><a href="{% url 'makeup_face_settingspray' %}">{% translate "Setting Spray" %}</a></li>
+                        <li><a href="{% url 'makeup_face_primer' %}">{% translate "Primer" %}</a></li>
+                        <li><a href="{% url 'makeup_face_contour' %}">{% translate "Contour" %}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+
+                  {% translate "Skincare" as skincare_text %}
+
+                  <a href="{% url 'store' %}"> {{skincare_text}} <i class="ion ion-ios-arrow-down"></i></a>
+                  <div class="menu-subs menu-column-1">
+                    <ul>
+                      <li><a href="{% url 'skincare_cleanser' %}">{% translate "Cleanser" %}</a></li>
+                      <li><a href="{% url 'skincare_lotion' %}">{% translate "Lotion" %}</a></li>
+                      <li><a href="{% url 'moisturizer' %}">{% translate "Moisturizer" %}</a></li>
+                      <li><a href="{% url 'skincare_treatments' %}">{% translate "Treatments" %}</a></li>
+                      <li><a href="{% url 'supplies_gift_sets' %}">{% translate "Gift Sets" %}</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+
+                  {% translate "Bath & Body" as bath_and_body_text %}
+
+                  <a href="{% url 'store' %}"> {{bath_and_body_text}} <i class="ion ion-ios-arrow-down"></i></a>
+
+                  <div class="menu-subs menu-column-1">
+                    <ul>
+                      <li><a href="{% url 'body_lotion' %}">{% translate "Body Lotion" %}</a></li>
+                      <li><a href="{% url 'body_mist' %}">{% translate "Body Mist" %}</a></li>
+                      <li><a href="{% url 'moisturizer' %}">{% translate "Moisturizer" %}</a></li>
+                      <li><a href="{% url 'candles' %}">{% translate "Candles" %}</a></li>
+                      <li><a href="{% url 'supplies_gift_sets' %}">{% translate "Beauty Supplies & Gift Sets" %}</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+
+                  {% translate "Fragrance" as fragance_text %}
+                  <a href="{% url 'store' %}">  {{ fragrance_text }} <i class="ion ion-ios-arrow-down"></i></a>
+
+                  <div class="menu-subs menu-column-1">
+                    <ul>
+                      <li><a href="{% url 'fragrance_women' %}">{% translate "Women" %}</a></li>
+                      <li><a href="{% url 'fragrance_men' %}">{% translate "Men" %}</a></li>
+                      <li><a href="{% url 'fragrance_kids' %}">{% translate "Kids" %}</a></li>
+                    </ul>
+                  </div>
+                </li>
+                  <li class="menu-item-has-children">
+
+                  {% translate "Other" as other_text %}
+
+                  <a href="{% url 'store' %}">{{ other_text }}<i class="ion ion-ios-arrow-down"></i></a>
+
+                  <div class="menu-subs menu-column-1">
+                    <ul>
+{% translate "Hair" as hair_text %}
+{% translate "Tools and Brushes" as tools_and_brushes_text %}
+{% translate "Sales and Clearance" as sales_and_clearance_text %}
+
+                      <li><a href="{% url 'hair' %}"> {{ hair_text }}</a></li>
+                      <li><a href="{% url 'toolsandbrushes' %}"> {{ tools_and_brushes_text }} </a></li>
+                      <li><a href="{% url 'salesandclearance' %}"> {{ sales_and_clearance_text }} </a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="header-item-right">
+            <a href="#" class="menu-icon"><i class="ion ion-md-search"></i></a>
+            <a href="#" class="menu-icon"><i class="ion ion-md-heart"></i></a>
+            <a href="#" class="menu-icon"><i class="ion ion-md-cart"></i></a>
+            <button type="button" class="menu-mobile-trigger">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+              <a href="{% url 'cart' %}">
+                <img id="cart-icon" src="{% static 'images/cart.png' %}" />
+            </a>
+            <p id="cart-total">{{cartItems}}</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div>
+        <div>
+
+              <form class="form-inline" method=POST action="{% url 'search_results' %}">
+                  {% csrf_token %}
+
+                  {% translate "Search" as search_text %}
+                  
+                <input class="form-control mr-sm-2" type="search" placeholder="{{ search_text }}" 
+                aria-label="{{search_text}}" name="searched">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" >{{ search_text }}...</button>
+              </form>
+                <a href="{% url 'cart' %}">
+                    <img id="cart-icon" src="{% static 'images/cart.png' %}" />
+                </a>
+                <p id="cart-total">{{cartItems}}</p>
+            </div>
+        </div>
+    </nav>
+              <form style="margin-left: 900px" class="form-inline" method=POST action="{% url 'search_results' %}">
+                  {% csrf_token %}
+                <input class="form-control mr-sm-2" type="search" placeholder="{{ search_text }}" aria-label="Search" name="searched">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" >{{ search_text }}...</button>
+              </form>
+    <div class="container">
+        <br />
+        {% block content %} {% endblock content %}
+    </div>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+        />
+    </head>
+        <div class="footer-dark">
+            <footer id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>{% translate "Services" %}</h3>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'makeup' %}"> {{ make_up_text }} </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'skincare' %}">{{ skincare_text }}</a>
+                                </li>
+                                <li><a href="{% url 'hair' %}"> {{ hair_text }} </a></li>
+                                <li>
+                                    <a href="{% url 'fragrance' %}">
+                                      {{ fragrance_text }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'toolsandbrushes' %}">
+                                      {{ tools_and_brushes_text }} 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bathandbody' %}">
+                                      {{ bath_and_body_text }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'salesandclearance' %}">
+                                      {{ sales_and_clearance_text }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 item text">
+                            <h3> {{ shop_title_text }} </h3>
+                            <p> {% translate "We Have Everything That You Are Looking For!" %}</p>
+                            &nbsp
+                            <h3>{% translate "Contact us!" %}</h3>
+                            <p>{% translate "Email:" %}</p>
+                            <p>{% translate "Phone Number:" %}</p>
+                        </div>
+                        <div class="col item social">
+                            <a href="#"
+                                ><i class="icon ion-social-facebook"></i></a
+                            ><a href="#"
+                                ><i class="icon ion-social-twitter"></i></a
+                            ><a href="#"
+                                ><i class="icon ion-social-snapchat"></i></a
+                            ><a href="#"
+                                ><i class="icon ion-social-instagram"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <p class="copyright">Store Name© 2021</p>
+                </div>
+            </footer>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"
+        ></script>
+
+        <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    </body>
+</html>
